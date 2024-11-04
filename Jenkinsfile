@@ -5,6 +5,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
+                    // Используйте 'docker' из библиотеки Docker Pipeline
                     def customImage = docker.build("zasvoih/sdf:latest")
                 }
             }
@@ -12,8 +13,9 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
+                    // Выполнение тестов внутри контейнера
                     customImage.inside {
-                        sh 'npm test'
+                        sh 'npm test' // Замените команду на вашу
                     }
                 }
             }
