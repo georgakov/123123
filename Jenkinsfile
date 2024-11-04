@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     // Используйте 'docker' из библиотеки Docker Pipeline
-                    def customImage = docker.build("zasvoih/sdf:latest")
+                    def customImage = docker.build("Dockerfile")
                 }
             }
         }
