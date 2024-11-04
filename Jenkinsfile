@@ -2,21 +2,23 @@ pipeline {
     agent any
 
     stages {
+        stage('Checkout SCM') {
+            steps {
+                checkout scm
+            }
+        }
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Используйте 'docker' из библиотеки Docker Pipeline
-                    def customImage = docker.build("123123/Dockerfile")
+                    // Обратите внимание на корректное имя образа
+                    sh 'docker build -t georgakov/myapp .'
                 }
             }
         }
         stage('Run Tests') {
             steps {
                 script {
-                    // Выполнение тестов внутри контейнера
-                    customImage.inside {
-                        sh 'npm test' // Замените команду на вашу
-                    }
+                    sh 'docker run --rm georgakov/myapp npm test'
                 }
             }
         }
